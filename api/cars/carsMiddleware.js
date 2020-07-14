@@ -13,6 +13,7 @@ function validateCarData (req, res, next) {
 
     const sanSchema = {
         type: "object",
+        strict: true,
         properties: {
             vin: {
                 type: "string",
@@ -57,6 +58,7 @@ function validateCarData (req, res, next) {
 
     const valSchema = {
         type: "object",
+        strict: true,
         properties: {
             vin: {
                 type: "string",
