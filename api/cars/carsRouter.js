@@ -45,8 +45,23 @@ router.get("/:id", (req, res) => {
 
 // Add a car
 
-router.post("/", validateCarData, (req, res) => {
-    res.send("ok");
+router.post("/", validateCarData, isVinUnique, (req, res) => {
+    carsDb.insert(req.body)
+    .then(cars => {
+        if (cars.length) {
+            res.status(200).json(cars);
+        } else {
+            res.status(404).json({
+                error: "Not found. Could not find a car."
+            });
+        }
+    })
+    .catch(error => {
+        res.status(500).json({
+            error: "Server error. Could not add a car.",
+            description: error
+        });
+    });
 });
 
 

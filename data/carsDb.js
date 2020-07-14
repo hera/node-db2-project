@@ -5,7 +5,8 @@ const TABLE_NAME = "cars";
 module.exports = {
     get,
     getById,
-    insert
+    insert,
+    getByVin
 }
 
 function get () {
@@ -14,6 +15,10 @@ function get () {
 
 function getById (id) {
     return db(TABLE_NAME).where({id});
+}
+
+function getByVin (vin) {
+    return db(TABLE_NAME).where({vin});
 }
 
 function insert (carData) {

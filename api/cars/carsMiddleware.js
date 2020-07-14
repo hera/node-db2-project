@@ -1,4 +1,4 @@
-const accountsDb = require("../../data/carsDb");
+const carsDb = require("../../data/carsDb");
 const inspector = require("schema-inspector");
 
 module.exports = {
@@ -111,19 +111,19 @@ function validateCarData (req, res, next) {
 }
 
 function isVinUnique (req, res, next) {
-    carsDb.getByName(req.body.name)
-        .then(accounts => {
-            if (!accounts.length) {
+    carsDb.getByVin(req.body.vin)
+        .then(cars => {
+            if (!cars.length) {
                 next();
             } else {
                 res.status(400).json({
-                    error: "Account name already exists."
+                    error: "Car vin already exists."
                 });
             }
         })
         .catch(error => {
             res.status(500).json({
-                error: "Server error. Could not get all accounts.",
+                error: "Server error. Could not get all cars.",
                 description: error
             });
         });
