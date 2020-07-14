@@ -1,5 +1,6 @@
 const express = require("express");
 const carsDb = require("../../data/carsDb");
+const { validateCarData, isVinUnique } = require("../cars/carsMiddleware");
 
 const router = express.Router();
 
@@ -39,6 +40,13 @@ router.get("/:id", (req, res) => {
                 description: error
             });
         });
+});
+
+
+// Add a car
+
+router.post("/", validateCarData, (req, res) => {
+    res.send("ok");
 });
 
 
