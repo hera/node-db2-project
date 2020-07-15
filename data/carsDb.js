@@ -23,7 +23,7 @@ function getByVin (vin) {
 
 function insert (carData) {
     return db(TABLE_NAME)
-        .insert(carData)
+        .insert(carData, "id")
         .then(ids => {
             return getById(ids[0]);
         })
